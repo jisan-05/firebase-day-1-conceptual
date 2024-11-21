@@ -1,24 +1,19 @@
-import React from 'react';
-import { GoogleAuthProvider,signInWithPopup } from "firebase/auth";
-import { GithubAuthProvider } from "firebase/auth";
-import { auth } from '../../Firebase/firebase.config';
-const Home = () => {
-    const googleProvider = new GoogleAuthProvider();
-    const gitHubProvider = new GithubAuthProvider();
+import React, { useContext } from 'react';
 
-    const handleGoogleLogin = () => {
-        signInWithPopup(auth, googleProvider)
-        .then(result => console.log(result))
-    }
-    const handleGitHubLogin = () => {
-        signInWithPopup(auth, gitHubProvider)
-        .then(result => console.log(result))
-    }
+import { authContext } from '../MainLayout/MainLayout';
+
+const Home = () => {
+
+    const contextValue = useContext(authContext)
+    console.log(contextValue)
+    const { handleGoogleLogin,handleGitHubLogin,twitterLogin} = contextValue;
+   
     return (
         <div>
-           <button onClick={handleGoogleLogin} className='px-3 py-2 text-white rounded-lg bg-green-600 m-5'>Google Login</button>
+            <button onClick={handleGoogleLogin} className='px-3 py-2 text-white rounded-lg bg-green-600 m-5'>Google Login</button>
            <button onClick={handleGitHubLogin} className='px-3 py-2 text-white rounded-lg bg-green-600 m-5'>Git Hub Login</button>
-        </div>
+           <button onClick={twitterLogin} className='px-3 py-2 text-white rounded-lg bg-green-600 m-5'>Twitter Login</button> 
+        </div> 
     );
 };
 
